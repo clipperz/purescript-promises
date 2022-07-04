@@ -1,3 +1,5 @@
-exports.undefer = function (f) {
+function foreignUndefer (f) {
   return f();
-};
+}
+
+export {foreignUndefer}

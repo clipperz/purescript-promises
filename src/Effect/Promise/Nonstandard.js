@@ -1,4 +1,4 @@
-exports.doneImpl = function (onSuccess, onError, promise) {
+export function doneImpl (onSuccess, onError, promise) {
   return function () {
     // polyfill taken from promisejs.org
     if (typeof Promise.prototype.done !== 'function') {
@@ -14,9 +14,9 @@ exports.doneImpl = function (onSuccess, onError, promise) {
     promise.done(onSuccess, onError);
     return null;
   };
-};
+}
 
-exports.finallyImpl = function (promise, eff) {
+export function finallyImpl (promise, eff) {
   // polyfill taken from promisejs.org
   if (typeof Promise.prototype['finally'] !== 'function') {
     Promise.prototype['finally'] = function (f) {
@@ -32,4 +32,4 @@ exports.finallyImpl = function (promise, eff) {
     };
   }
   return promise.finally(eff());
-};
+}

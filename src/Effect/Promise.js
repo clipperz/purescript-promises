@@ -1,20 +1,20 @@
-exports.thenImpl = function (promise, onFulfilled, onRejected) {
+function thenImpl (promise, onFulfilled, onRejected) {
   return promise.then(onFulfilled, onRejected);
-};
+}
 
-exports.catchImpl = function (promise, f) {
+function catchImpl (promise, f) {
   return promise.catch(f);
-};
+}
 
-exports.resolveImpl = function (a) {
+function resolveImpl (a) {
   return Promise.resolve(a);
-};
+}
 
-exports.rejectImpl = function (a) {
+function rejectImpl (a) {
   return Promise.reject(a);
-};
+}
 
-exports.promiseToEffectImpl = function (promise, onFulfilled, onRejected) {
+function promiseToEffectImpl (promise, onFulfilled, onRejected) {
   return function () {
     return promise.then(function (a) {
       return onFulfilled(a)();
@@ -22,17 +22,17 @@ exports.promiseToEffectImpl = function (promise, onFulfilled, onRejected) {
       return onRejected(err)();
     });
   };
-};
+}
 
-exports.allImpl = function (arr) {
+function allImpl (arr) {
   return Promise.all(arr);
-};
+}
 
-exports.raceImpl = function (arr) {
+function raceImpl (arr) {
   return Promise.race(arr);
-};
+}
 
-exports.liftEffectImpl = function (eff) {
+function liftEffectImpl (eff) {
   return new Promise(function (onSucc, onErr) {
     try {
       result = eff();
@@ -41,9 +41,9 @@ exports.liftEffectImpl = function (eff) {
     }
     return onSucc(result);
   });
-};
+}
 
-exports.promiseImpl = function (callback) {
+function promiseImpl (callback) {
   return new Promise(function(resolve, reject) {
     callback(function (a) {
       return function () {
@@ -55,10 +55,12 @@ exports.promiseImpl = function (callback) {
       };
     })();
   });
-};
+}
 
-exports.delayImpl = function (a, ms) {
+function delayImpl (a, ms) {
   return new Promise(function (resolve, reject) {
     setTimeout(resolve, ms, a);
   });
-};
+}
+
+export {allImpl, catchImpl, delayImpl, liftEffectImpl, promiseImpl, promiseToEffectImpl, raceImpl,  rejectImpl, resolveImpl, thenImpl}
