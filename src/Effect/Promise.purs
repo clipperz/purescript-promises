@@ -26,7 +26,7 @@ import Data.Time.Duration (Milliseconds)
 import Data.Unfoldable (class Unfoldable)
 import Effect (Effect)
 import Effect.Class (class MonadEffect)
-import Effect.Exception (Error, throwException)
+import Effect.Exception (Error)
 import Effect.Promise.Unsafe (class Deferred) as Exports
 import Effect.Promise.Unsafe (class Deferred, undefer)
 
