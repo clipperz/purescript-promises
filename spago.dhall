@@ -18,7 +18,6 @@ to generate this file without the comments in this block.
   , "exceptions"
   , "functions"
   , "prelude"
-  , "psci-support"
   , "transformers"
 --   
   , "arrays"

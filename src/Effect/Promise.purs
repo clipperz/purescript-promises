@@ -145,8 +145,8 @@ runPromise
   -> Effect Unit
 runPromise onSucc onErr p = runFn3 promiseToEffectImpl (undefer p) onSucc onErr
 
-yoloPromise :: forall a. (Deferred => Promise a) -> Effect Unit
-yoloPromise dp = runPromise (const (pure unit)) throwException dp
+-- yoloPromise :: forall a. (Deferred => Promise a) -> Effect Unit
+-- yoloPromise dp = runPromise (const (pure unit)) throwException dp
 
 instance functorPromise :: Deferred => Functor Promise where
   map :: forall a b. Deferred => (a -> b) -> Promise a -> Promise b
@@ -174,11 +174,11 @@ instance monadErrorPromise :: Deferred => MonadError Error Promise where
   catchError = catch
 
 instance semigroupPromise :: (Deferred, Semigroup a) => Semigroup (Promise a) where
-  append :: forall a. Deferred => Semigroup a => Promise a -> Promise a -> Promise a
+  append :: forall a'. Deferred => Semigroup a' => Promise a' -> Promise a' -> Promise a'
   append a b = append <$> a <*> b
 
 instance monoidPromise :: (Deferred, Monoid a) => Monoid (Promise a) where
-  mempty :: forall a. Deferred => Monoid a => Promise a
+  mempty :: forall a'. Deferred => Monoid a' => Promise a'
   mempty = resolve mempty
 
 foreign import liftEffectImpl :: forall a. Effect a -> Promise a
